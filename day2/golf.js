@@ -1,5 +1,5 @@
 const p=r=>r.split("\n").map(e=>e.match(/(\d+)-(\d+) (.): (.+)/))
 
-const part1=r=>p(r).filter(e=>(k=[...e[4].matchAll(e[3])].length)>= +e[1]&&k<= +e[2]).length
+const part1=r=>p(r).filter(([,b,c,d,e])=>(k=[...e.matchAll(d)].length)>=+b&&k<=+c).length
 
-const part2=r=>p(r).filter(e=>e[4][e[1]-1]==e[3]^e[4][e[2]-1]==e[3]).length
+const part2=r=>p(r).filter(([,b,c,d,e])=>e[b-1]==d^e[c-1]==d).length
