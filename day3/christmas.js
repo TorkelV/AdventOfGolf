@@ -1,25 +1,34 @@
+   
+   
 
-
-                        /*
-                        */
-                       ski=(
-                    right,down,
-                   hill)=>{let[x,
-                  y,trees]=[0,0,0];
-                while(y<hill.length)
-              {trees+= hill[y][x]=="#"
-            x=(x+right)%hill[0].length;y
-           +=down}return trees};part1=i=>
-          ski(3,1, parse(i));var parse=i=>
-          i.split`\n`;part2=i=>(h=parse(i)
-          ,ski(1,1,h)*ski(3,1,h)*ski(5,1,h
-                    )*ski(7,1
-                 ,h)*ski(1,2,h))
+                        '🌟'
+                        /**\ 
+                       /****\
+                      /**🔔**\
+                     /********\
+                    /**/ski=(/*\
+                   /**/right, /*\
+                  /*/down, hill/*\
+                 /*/)=>{let [x,y/*\
+                /*/,trees]=[0,0,0/*\
+               /*/]; while (y<hill/*\
+              /*/.length) {trees +=/*\
+             /*/hill[y][x] == "#";x=/*\
+            /*/(x+right) % hill[0]  /**\
+           /*/.length;`🎁`;y +=down}/***\
+          /*/return trees} ; part1=i=>/**\
+         /*/ski(3,1,parse(i));parse=i=>/**\
+        /*/i.split`\n` ;`🔔`; part2= i=>/**\
+        \*/(h=parse(i),ski(1,1,h)*ski(3,/*\/
+         \********/1,h)*ski(5,/***********/
+                   1,h)*ski(7,1
+        +(`🎁🎁`|0),h)*ski(1,2,h));`🎁🎁`
                    
+                 
                  
 //Test
 
-var inp = `....#...#####..##.#..##..#....#
+var input = `....#...#####..##.#..##..#....#
 ..##.#.#.........#.#......##...
 #.#.#.##.##...#.......#...#..#.
 ..##.............#.#.##.....#..
