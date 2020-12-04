@@ -2,8 +2,8 @@ const p=r=>r.split("\n\n").map(e=>e.split(/\s/).map(s=>s.split(":")))
 const part1=r=>p(r).filter(e=>["byr","iyr","eyr","hgt","hcl","ecl","pid"].every(s=>e.some(([a])=>a==s))).length
 const part2=r=>p(r).filter(e=>
     [["byr",b=>+b<=2002&&+b>=1920],
-    ["iyr",b=>+b>=2010 &&+b<=2020],
-    ["eyr",b=>+b>=2020 &&+b<=2030],
+    ["iyr",b=>+b>=2010&&+b<=2020],
+    ["eyr",b=>+b>=2020&&+b<=2030],
     ["hgt",b=>(r=+b.replace(/cm$/,""))>=150&&r<=193||(r=+b.replace(/in$/,""))>=59&&r<=76],
     ["hcl",b=>/^#([0-9abcdef]{6})$/.test(b)],
     ["ecl",b=>/^amb|blu|brn|gry|grn|hzl|oth$/.test(b)],
