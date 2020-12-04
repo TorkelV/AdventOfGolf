@@ -4,7 +4,7 @@ const part2=r=>p(r).filter(e=>
     [["byr",b=>+b<=2002&&+b>=1920],
     ["iyr",b=>+b>=2010 &&+b<=2020],
     ["eyr",b=>+b>=2020 &&+b<=2030],
-    ["hgt",(b,a="")=>(a=+b.replace(/cm$/,""))>=150&&a<=193||(a=+b.replace(/in$/,""))>=59&&a<=76],
+    ["hgt",b=>(r=+b.replace(/cm$/,""))>=150&&r<=193||(r=+b.replace(/in$/,""))>=59&&r<=76],
     ["hcl",b=>/^#([0-9abcdef]{6})$/.test(b)],
     ["ecl",b=>/^amb|blu|brn|gry|grn|hzl|oth$/.test(b)],
     ["pid",b=>/^\d{9}$/.test(b)]].every(([n,c])=>e.some(([a,b])=>a==n&&c(b)))).length
