@@ -1,13 +1,16 @@
-const p=r=>r.split("\n\n").map(e=>e.split(/\s/).map(s=>s.split(":")))
-const part1=r=>p(r).filter(e=>["byr","iyr","eyr","hgt","hcl","ecl","pid"].every(s=>e.some(([a])=>a==s))).length
+m = [x,z,q,w,y,u,o] = ["byr","iyr","eyr","hgt","hcl","ecl","pid"]
+p=r=>r.split("\n\n").map(e=>e.split(/\s/).map(s=>s.split(":")))
+
+const part1=r=>p(r).filter(e=>m.every(s=>e.some(([a])=>a==s))).length
+
 const part2=r=>p(r).filter(e=>
-    [["byr",b=>+b<=2002&&+b>=1920],
-    ["iyr",b=>+b>=2010&&+b<=2020],
-    ["eyr",b=>+b>=2020&&+b<=2030],
-    ["hgt",b=>(r=+b.replace(/cm$/,""))>=150&&r<=193||(r=+b.replace(/in$/,""))>=59&&r<=76],
-    ["hcl",b=>/^#([0-9abcdef]{6})$/.test(b)],
-    ["ecl",b=>/^amb|blu|brn|gry|grn|hzl|oth$/.test(b)],
-    ["pid",b=>/^\d{9}$/.test(b)]].every(([n,c])=>e.some(([a,b])=>a==n&&c(b)))).length
+    [[x,b=>+b<=2002&&+b>=1920],
+    [z,b=>+b>=2010&&+b<=2020],
+    [q,b=>+b>=2020&&+b<=2030],
+    [w,b=>(r=+b.replace(/cm$/,""))>=150&&r<=193||(r=+b.replace(/in$/,""))>=59&&r<=76],
+    [y,b=>/^#([0-9abcdef]{6})$/.test(b)],
+    [u,b=>/^amb|blu|brn|gry|grn|hzl|oth$/.test(b)],
+    [o,b=>/^\d{9}$/.test(b)]].every(([n,c])=>e.some(([a,b])=>a==n&&c(b)))).length
 
 const inp = `ecl:grn
 cid:315 iyr:2012 hgt:192cm eyr:2023 pid:873355140 byr:1925 hcl:#cb2c03
