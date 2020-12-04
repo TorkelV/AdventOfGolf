@@ -1,26 +1,15 @@
-const part2 = r => {
-    r = r.split("\n")
-    let k = 0;
-    let arr = [];
-    for(let i=0; i<r.length; i++){
-        if(r[i]==""){
-            k++
-            continue
-        }
-        arr[k] = arr[k]||[]
-        r[i].split(" ").forEach(e=>{arr[k].push(e.split(":"))})
-    }
-    return arr.filter(e=>
-        e.some(h=>h[0] == "byr" && +h[1] <= 2002 && +h[1] >= 1920) 
-        && e.some(h=>h[0] == "iyr" && +h[1] >= 2010 && +h[1] <= 2020) 
-        && e.some(h=>h[0] == "eyr" && +h[1] >= 2020 && +h[1] <= 2030) 
-        && e.some(h=>h[0] == "hgt" && (/^\d+cm$/.test(h[1]) && +(h[1].replace("cm","")) >= 150 && +(h[1].replace("cm","")) <= 193) || (/^\d+in$/.test(h[1]) && +(h[1].replace("in","")) >= 59 &&  +(h[1].replace("in","")) <= 76)) 
-        && e.some(h=>h[0] == "hcl" && /^#([0-9abcdef]{6})$/.test(h[1])) 
-        && e.some(h=>h[0] == "ecl" && /^amb|blu|brn|gry|grn|hzl|oth$/.test(h[1]))
-        && e.some(h=>h[0] == "pid" && /^\d{9}$/.test(h[1])))
-}
+const p=r=>r.split("\n\n").map(e=>e.split(/\s/).map(s=>s.split(":")))
+const part1=r=>p(r).filter(e=>["byr","iyr","eyr","hgt","hcl","ecl","pid"].every(s=>e.some(([a])=>a==s))).length
+const part2=r=>p(r).filter(e=>
+    [["byr",b=>+b<=2002&&+b>=1920],
+    ["iyr",b=>+b>=2010 &&+b<=2020],
+    ["eyr",b=>+b>=2020 &&+b<=2030],
+    ["hgt",(b,a="")=>(a=+b.replace(/cm$/,""))>=150&&a<=193||(a=+b.replace(/in$/,""))>=59&&a<=76],
+    ["hcl",b=>/^#([0-9abcdef]{6})$/.test(b)],
+    ["ecl",b=>/^amb|blu|brn|gry|grn|hzl|oth$/.test(b)],
+    ["pid",b=>/^\d{9}$/.test(b)]].every(([n,c])=>e.some(([a,b])=>a==n&&c(b)))).length
 
-var inp = `ecl:grn
+const inp = `ecl:grn
 cid:315 iyr:2012 hgt:192cm eyr:2023 pid:873355140 byr:1925 hcl:#cb2c03
 
 byr:2027 hcl:ec0cfd ecl:blu cid:120
@@ -1122,4 +1111,5 @@ hgt:171cm
 ecl:#ae12d3 hgt:74cm cid:239 hcl:z pid:345439730 iyr:1924 byr:2029 eyr:2031
 `
 
-part2(inp)
+console.log(part1(inp))
+console.log(part2(inp))
