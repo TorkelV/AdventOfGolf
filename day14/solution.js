@@ -1,25 +1,11 @@
 
 
-var part1 = inp => {
-    const mask = inp.split("\n")[0].replace("mask = ", "")
-    const maskNums = mask.split("").map((e,i)=>[e,i]).filter(e=>e[0]!="X")
-    const nums = inp.split("\n").slice(1).map(e=>e.match(/mem\[(\d+)\] = (\d+)/).slice(1)).map(e=>{
-        return {
-            r: e[0],
-            n: parseInt(e[1]).toString(2).padStart(mask.length, "0").split("")
-        }
-    }).map(e=>{
-        maskNums.forEach(n=>{
-            e.n[n[1]] = n[0]
-        })
-        e.n = e.n.join("")
-        return e
-    }).reduce((a,b)=>{
-        a[b.r] = parseInt(b.n,2)
-        return a
-    },{})
-    return Object.keys(nums).reduce((a,b)=>a+nums[b],0)
-}
+var part1 = inp => 
+    Object.keys((nums=inp.split("mask = ").filter(Boolean).map(e=>e.split("\n").filter(Boolean).map((e,i,a)=>i?e.match(/mem\[(\d+)\] = (\d+)/).slice(1).map((e,i)=>i?parseInt(e).toString(2).padStart(a[0].length, "0").split("").map(((e,i)=>a[0][i]!="X"?a[0][i]:e)).join(""):e):e)).flat(1).filter(e=>e instanceof Array).reduce((a,b)=>{
+            a[b[0]] = parseInt(b[1],2)
+            return a
+        },{}))).reduce((a,b)=>a+nums[b],0)
+
 
 
 var inp = `mask = 100110X100000XX0X100X1100110X001X100
