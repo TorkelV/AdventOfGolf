@@ -7,6 +7,33 @@ var part1 = inp =>
         },{}))).reduce((a,b)=>a+nums[b],0)
 
 
+var comb = mask => {
+    var len = mask.replace(/[^X]/g,"").length
+    return Array(Math.pow(2,len)+1).fill().map((e,i)=>(i).toString(2).padStart(len,"0")).map(e=>{
+        var k = e.split("")
+        var m = mask	
+    while(k.length){
+            m = m.replace("X",k.shift())
+    }
+        return parseInt(m,2)
+    })
+}
+
+
+var part2=inp=>{
+    let nums = inp.split("mask = ").filter(Boolean).map(e=>e.split("\n").filter(Boolean).map((e,i,a)=>i?e.match(/mem\[(\d+)\] = (\d+)/).slice(1):e)).map(a=>{
+    let mask = a[0]
+    return a.slice(1).map(e=>{
+        e[0] = comb(parseInt(e[0]).toString(2).padStart(mask.length,"0").split("").map((c,i)=>mask[i]!="0"?mask[i]:c).join(""))
+        return e
+    })
+    }).flat(1).reduce((a,b)=>{
+        b[0].forEach(e=>a[e]=+b[1])
+        return a
+    },{})
+    return Object.keys(nums).reduce((a,b)=>a+nums[b],0)
+}
+
 
 var inp = `mask = 100110X100000XX0X100X1100110X001X100
 mem[21836] = 68949
@@ -531,5 +558,13 @@ mem[61739] = 56110
 mem[43710] = 78470470`
 
 
+var ex = `mask = 000000000000000000000000000000X1001X
+mem[42] = 100
+mask = 00000000000000000000000000000000X0XX
+mem[26] = 1`
 
-console.log(part1(inp))
+
+console.log(part2(ex))
+
+
+console.log(part2(inp))
