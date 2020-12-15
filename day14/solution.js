@@ -12,9 +12,7 @@ var comb = mask => {
     return Array(Math.pow(2,len)+1).fill().map((e,i)=>(i).toString(2).padStart(len,"0")).map(e=>{
         var k = e.split("")
         var m = mask	
-    while(k.length){
-            m = m.replace("X",k.shift())
-    }
+        while(k.length) m = m.replace("X",k.shift())
         return parseInt(m,2)
     })
 }
@@ -22,11 +20,11 @@ var comb = mask => {
 
 var part2=inp=>{
     let nums = inp.split("mask = ").filter(Boolean).map(e=>e.split("\n").filter(Boolean).map((e,i,a)=>i?e.match(/mem\[(\d+)\] = (\d+)/).slice(1):e)).map(a=>{
-    let mask = a[0]
-    return a.slice(1).map(e=>{
-        e[0] = comb(parseInt(e[0]).toString(2).padStart(mask.length,"0").split("").map((c,i)=>mask[i]!="0"?mask[i]:c).join(""))
-        return e
-    })
+        let mask = a[0]
+        return a.slice(1).map(e=>{
+            e[0] = comb(parseInt(e[0]).toString(2).padStart(mask.length,"0").split("").map((c,i)=>mask[i]!="0"?mask[i]:c).join(""))
+            return e
+        })
     }).flat(1).reduce((a,b)=>{
         b[0].forEach(e=>a[e]=+b[1])
         return a

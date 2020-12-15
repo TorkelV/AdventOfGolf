@@ -3,7 +3,7 @@ var part1 = r => {
     let buses = r.split("\n")[1].split(",").filter(e=>e!="x").map(e=>+e)
     let diff = buses.map(e=>e-(time%e))
     let min = Math.min(...diff)
-    return Math.min(...diff) * buses[diff.indexOf(min)]
+    return min * buses[diff.indexOf(min)]
 }
 
 var part2 = r => {
